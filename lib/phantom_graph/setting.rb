@@ -1,6 +1,6 @@
 module PhantomGraph
-  class Setting
-    attr_accessor :default_options
+  class Setting < PhantomGraph::Base
+    attributes :default_options
     attr_writer :phantomjs
 
     [:phantom_js_path, 

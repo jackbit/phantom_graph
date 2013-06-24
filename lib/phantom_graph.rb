@@ -1,3 +1,6 @@
+require 'json'
 require 'phantom_graph/version'
+require 'phantom_graph/base'
 require 'phantom_graph/setting'
+require 'phantom_graph/error'
 require 'phantom_graph/convert/highchart'
