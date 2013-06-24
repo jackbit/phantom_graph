@@ -50,8 +50,19 @@ add initialize file to "config/initializers/phantom_graph.rb"
 Highchart JSON to Image
     # more sample of json, please check this page: http://www.highcharts.com/demo/
     # or check spec/phantom_graph/convert/highchart_spec.rb
-    highchart = PhantomGraph::Convert::Highchart.new(json_str, {image_file_path: "#{Rails.root}/tmp/output.png"})
+    options = {image_file_path: "#{Rails.root}/tmp/output.png"}
+    callback_json = "customCallback" # optional, can be nil
+    highchart = PhantomGraph::Convert::Highchart.new(json_str, options, callback_json)
     highchart.image # giving image file
+
+Complete options for module Highchart with default values:
+    {width: 600, 
+     scale: 2.5, 
+     constr: "Chart", 
+     json_file_path:     "/tmp", 
+     image_file_path:    "/tmp", 
+     callback_file_path: "/tmp"
+    }
 
 
 = TODO
@@ -61,3 +72,4 @@ Highchart JSON to Image
 4. Add PDF Convertion
 5. Integrate with Prawn
 6. More testings
+7. Clean up Code and README
