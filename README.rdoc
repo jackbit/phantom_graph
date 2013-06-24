@@ -67,7 +67,7 @@ Complete options for module Highchart with default values:
 
 = TODO
 1. Add Highstock module
-2. Add Google Analytic Module
+2. Add Google Chart Module
 3. Testing in Ruby 1.8
 4. Add PDF Convertion
 5. Integrate with Prawn
