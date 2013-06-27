@@ -11,8 +11,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Yacobus Reinhart"]
   s.email       = ["yacobus.reinhart@gmail.com"]
   s.homepage    = "https://github.com/jackbit"
-  s.summary     = "Generate highchart to graph with phantomjs on serverside"
-  s.description = "Generate highchart to graph with phantomjs on serverside"
+  s.summary     = "Ruby api to convert javascript chart to pdf or image with phantomjs"
+  s.description = "PhantomGraph helps complex process to generate javascript charts to image or pdf without requesting or rendering view to the application. PhantomGraph is pure server-side process by using phantomjs and suitable for background process. It is lighweight solution for wkhtmltopdf alternative."
   s.files       = `git ls-files`.split($/)
   s.files.reject! { |fn| fn.include? "script" }
   s.executables   = s.files.grep(%r{^bin/}).map { |f| File.basename(f) }

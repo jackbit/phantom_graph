@@ -1,6 +1,8 @@
 = PhantomGraph
 
-PhantomGraph is ruby API to generate chart from json to image by phantomjs
+PhantomGraph helps complex process to generate javascript charts to image or pdf without requesting or rendering view to the application. 
+PhantomGraph is pure server-side process by using phantomjs and suitable for background process. 
+It is lighweight solution for wkhtmltopdf alternative.
 
 = Installation
 
