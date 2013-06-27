@@ -4,8 +4,9 @@ PhantomGraph is ruby API to generate chart from json to image by phantomjs
 
 = Installation
 
-    gem 'phantom_graph', git: 'git@github.com:jackbit/phantom_graph.git'
-
+    gem 'phantom_graph'
+or
+    gem install 'phantom_graph'
 
 Do not forget to install phantomjs
 
@@ -16,58 +17,43 @@ Do not forget to install phantomjs
 add initialize file to "config/initializers/phantom_graph.rb"
 ```
   PhantomGraph.configure do |config|
-    # your location to phantomjs file 
-    # default is taken from `which phantomjs` or `bundle exec which phantomjs`
+  
+    # default: `which phantomjs` or `bundle exec which phantomjs`
     config.phantomjs = "/usr/local/bin/phantomjs"
   
-    # Display log in STDOUT
     # default: false
     config.logger = true
     
-    # Location for Highchart Convert JS
-    # default: already embeded in gem
-    # config.highcharts_convert_path = "#{Rails.root}/app/assets/javascripts/highcharts-convert.js"
+    # Some javascript plugins are included in Gem
+    # if you override please change configuration below
     
-    # Location for Highchart Theme JS
-    # default: already embeded in gem by using gray template (gray.js)
-    # more: https://github.com/highslide-software/highcharts.com/tree/master/js/themes
-    # config.highcharts_theme_path = "#{Rails.root}/app/assets/javascripts/highcharts-theme.js"
-    
-    # Location for Highchart JS
-    # default: already embeded in gem
-    # config.highcharts_path = "#{Rails.root}/app/assets/javascripts/highcharts.js"
-    
-    # Location for Highchart JS
-    # default: already embeded in gem
-    # config.highstock_path = "#{Rails.root}/app/assets/javascripts/highstock.js"
-    
-    # Location for JQuery JS
-    # default: already embeded in gem
-    # config.jquery_path = "#{Rails.root}/app/assets/javascripts/jquery.js"
+    # config.highcharts_convert_path = "/path/app/js/highcharts-convert.js"
+    # config.highcharts_theme_path = "/path/app/js/highcharts-theme.js"
+    # config.highcharts_path = "/path/app/js/highcharts.js"
+    # config.highstock_path = "/path/app/js/highstock.js"
+    # config.jquery_path = "/path/app/js/jquery.js"
   end
 
+=== For more samples of json string or file please check:
+    * highchart json, please check: http://www.highcharts.com/demo/
+    * highstock json, please check: http://www.highcharts.com/stock/demo
 
-Example Usage: Highchart or Highstock
-    # more samples for:
-    #  * highchart json, please check: http://www.highcharts.com/demo/
-    #  * highstock json, please check: http://www.highcharts.com/stock/demo
-
-    
-    options = {image_file_path: "#{Rails.root}/tmp", filename: "output.png"}
-    callback_json = "customCallback" # optional, can be nil
-
+==== Highchart
     # sample script: spec/phantom_graph/convert/highchart_spec.rb
+    options = {image_file_path: "#{Rails.root}/tmp", filename: "output.png"}
+    callback_json = "customCallback"
     highchart = PhantomGraph::Convert::Highchart.new(json_str, options, callback_json)
     highchart.result
 
-    # sample script: spec/phantom_graph/convert/highchart_spec.rb
-    callback_json = "customCallback" # optional, can be nil
+==== Highstock
+    # sample script: spec/phantom_graph/convert/higstock_spec.rb
+    options = {image_file_path: "/path/project/public", filename: "report.pdf"}
     highstock = PhantomGraph::Convert::Highstock.new(json_str, options, callback_json)
     highstock.result
 
-If you want the output as pdf, svg, png or jpg, you can change the filename parameter with expected extention file.
+==== Outputs: PDF, SVG, PNG, JPG
 
-Complete options for module Highchart or Highstock with default values:
+===== Default options for Highstock and Highchart:
     {width:              1200, 
      scale:              0.5, 
      constr:             "Chart", 
@@ -81,3 +67,4 @@ Complete options for module Highchart or Highstock with default values:
 = TODO
 1. Add Google Chart Module
 2. Add Custom Theme Support
+3. Add Synchronous Processor
