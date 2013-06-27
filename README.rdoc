@@ -43,33 +43,41 @@ add initialize file to "config/initializers/phantom_graph.rb"
     
     # Location for JQuery JS
     # default: already embeded in gem
-    # config.jquery_path             = "#{Rails.root}/app/assets/javascripts/jquery.js"
+    # config.jquery_path = "#{Rails.root}/app/assets/javascripts/jquery.js"
   end
 
 
-Highchart JSON to Image
-    # more sample of json, please check this page: http://www.highcharts.com/demo/
-    # or check spec/phantom_graph/convert/highchart_spec.rb
-    options = {image_file_path: "#{Rails.root}/tmp/output.png"}
-    callback_json = "customCallback" # optional, can be nil
-    highchart = PhantomGraph::Convert::Highchart.new(json_str, options, callback_json)
-    highchart.image # giving image file
+Example Usage: Highchart or Highstock
+    # more samples for:
+    #  * highchart json, please check: http://www.highcharts.com/demo/
+    #  * highstock json, please check: http://www.highcharts.com/stock/demo
 
-Complete options for module Highchart with default values:
-    {width: 600, 
-     scale: 2.5, 
-     constr: "Chart", 
+    
+    options = {image_file_path: "#{Rails.root}/tmp", filename: "output.png"}
+    callback_json = "customCallback" # optional, can be nil
+
+    # sample script: spec/phantom_graph/convert/highchart_spec.rb
+    highchart = PhantomGraph::Convert::Highchart.new(json_str, options, callback_json)
+    highchart.result
+
+    # sample script: spec/phantom_graph/convert/highchart_spec.rb
+    callback_json = "customCallback" # optional, can be nil
+    highstock = PhantomGraph::Convert::Highstock.new(json_str, options, callback_json)
+    highstock.result
+
+If you want the output as pdf, svg, png or jpg, you can change the filename parameter with expected extention file.
+
+Complete options for module Highchart or Highstock with default values:
+    {width:              1200, 
+     scale:              0.5, 
+     constr:             "Chart", 
      json_file_path:     "/tmp", 
      image_file_path:    "/tmp", 
+     filename:           nil,
      callback_file_path: "/tmp"
     }
 
 
 = TODO
-1. Add Highstock module
-2. Add Google Chart Module
-3. Testing in Ruby 1.8
-4. Add PDF Convertion
-5. Integrate with Prawn
-6. More testings
-7. Clean up Code and README
+1. Add Google Chart Module
+2. Add Custom Theme Support

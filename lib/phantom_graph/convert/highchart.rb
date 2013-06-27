@@ -1,10 +1,10 @@
-require 'logger'
 module PhantomGraph
   module Convert
     class Highchart < PhantomGraph::Base
       CH_OPTIONS = {width:              600, 
-                    scale:              2.5, 
-                    constr:             "Chart", 
+                    scale:              1, 
+                    constr:             "Chart",
+                    filename:           nil, 
                     json_file_path:     "/tmp", 
                     image_file_path:    "/tmp", 
                     callback_file_path: "/tmp"}
@@ -28,7 +28,12 @@ module PhantomGraph
         f
       end
 
+      def result
+        image
+      end
+
       def random_filename
+        return @options[:filename] if @options[:filename]
         "#{rand(100000)}-#{Time.now.to_i}.png"
       end
 
@@ -85,11 +90,15 @@ module PhantomGraph
       def prepare_tmp_files
         self.json_file     = Tempfile.new( ['json',     '.json'], options[:json_file_path] )
         self.callback_file = Tempfile.new( ['callback', '.json'], options[:callback_file_path] )
-        self.image_file    = Tempfile.new( ['chart',    '.png'],  options[:image_file_path]  )
+        self.image_file    = Tempfile.new( ['chart',    file_ext],  options[:image_file_path]  )
       end
 
       def log(msg)
         logger.debug(msg) if options[:logger]
+      end
+
+      def file_ext
+        options[:filename] ? options[:filename].match(/\.\w+$/i).to_s.downcase : ".png"
       end
 
         
