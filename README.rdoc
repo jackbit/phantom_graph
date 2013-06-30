@@ -50,7 +50,7 @@ add initialize file to "config/initializers/phantom_graph.rb"
 ==== Highstock
     # sample script: spec/phantom_graph/convert/higstock_spec.rb
     options = {image_file_path: "/path/project/public", filename: "report.pdf"}
-    highstock = PhantomGraph::Convert::Highstock.new(json_str, options, callback_json)
+    highstock = PhantomGraph::Convert::Highstock.new(json_str, options)
     highstock.result
 
 ==== Outputs: PDF, SVG, PNG, JPG
